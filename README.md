@@ -1,1 +1,1 @@
-Datastructure & Algorithm
+Datastructures & Algorithm
