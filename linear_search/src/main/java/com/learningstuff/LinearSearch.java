@@ -34,7 +34,7 @@ public class LinearSearch {
 
     }
 
-    public static  <T> T findFromList(List<T> list, T element) {
+    public static <T> T findFromList(List<T> list, T element) {
 
         for (T t : list) {
 
@@ -48,7 +48,7 @@ public class LinearSearch {
 
     }
 
-    public static  <T> int findIndexFromList(List<T> list, T element) {
+    public static <T> int findIndexFromList(List<T> list, T element) {
 
         for (int i = 0; i < list.size(); i++) {
 
