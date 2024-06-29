@@ -1,4 +1,4 @@
-package com.learningstuff;
+package com.learningstuff.algo;
 
 /**
  * Created by IntelliJ IDEA.

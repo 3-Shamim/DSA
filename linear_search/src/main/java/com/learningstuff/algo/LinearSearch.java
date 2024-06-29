@@ -1,4 +1,4 @@
-package com.learningstuff;
+package com.learningstuff.algo;
 
 import java.util.Arrays;
 import java.util.List;
