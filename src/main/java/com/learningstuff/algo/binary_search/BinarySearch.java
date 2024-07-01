@@ -1,4 +1,4 @@
-package com.learningstuff.algo;
+package com.learningstuff.algo.binary_search;
 
 /**
  * Created by IntelliJ IDEA.
