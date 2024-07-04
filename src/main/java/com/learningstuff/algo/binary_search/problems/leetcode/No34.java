@@ -25,7 +25,10 @@ public class No34 {
         }
 
         result[0] = find(nums, target, true);
-        result[1] = find(nums, target, false);
+
+        if (result[0] != -1) {
+            result[1] = find(nums, target, false);
+        }
 
         return result;
     }
