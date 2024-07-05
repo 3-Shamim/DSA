@@ -14,6 +14,19 @@ package com.learningstuff.algo.binary_search.problems.leetcode;
 
 public class No1095 {
 
+    // Solve with linear search
+    public static int findInMountainArray1(int target, int[] arr) {
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] ==target) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    // Solve with binary search
     //    public int findInMountainArray(int target, MountainArray mountainArr) {
     public static int findInMountainArray(int target, int[] arr) {
 
