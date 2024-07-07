@@ -1,7 +1,5 @@
 package com.learningstuff.algo.binary_search.problems.leetcode;
 
-import java.util.Arrays;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim
@@ -16,7 +14,7 @@ import java.util.Arrays;
 
 public class No410 {
 
-    public static int splitArray(int[] nums, int k) {
+    public static int splitArray1(int[] nums, int k) {
 
         int[] pos = new int[k];
 
@@ -41,27 +39,108 @@ public class No410 {
 
         }
 
-        System.out.println(Arrays.toString(pos));
-        System.out.println(iMax);
-        System.out.println(mPos);
+        if (k == 1 || nums.length == k) {
+            return iMax;
+        }
 
-        for (int i = pos.length - 1; i >= 0; i--) {
+        int ans = iMax;
 
-            for (int j = i; j < nums.length - (pos.length - 1 - i); j++) {
-                pos[i] = j;
+        for (int i = pos.length - 1; i > 0; i--) {
+
+            for (int j = i; j < nums.length - (pos.length - i); j++) {
+
+                int left = pos[i - 1] + nums[j];
+                int right = pos[i] - nums[j];
+
+                if (i == mPos) {
+
+                    if (left > right) {
+                        iMax = left;
+                        mPos = i - 1;
+                    } else {
+                        iMax = right;
+                    }
+
+                } else if (i - 1 == mPos) {
+                    iMax = left;
+                }
+
+                if (ans > iMax) {
+                    ans = iMax;
+                }
+
+                pos[i - 1] = left;
+                pos[i] = right;
+
             }
 
         }
 
-        System.out.println(Arrays.toString(pos));
+        return ans;
+    }
+
+    public static int splitArray(int[] nums, int k) {
+
+        int left = 0, right = 0;
+
+        for (int num : nums) {
+
+            if (left < num) {
+                left = num;
+            }
+
+            right += num;
+
+        }
+
+        int subArrCount = 0;
+        int ans = 0;
+
+        while (left <= right) {
+
+            int mid = left + (right - left) / 2;
+
+            int sum = 0;
+            int max = 0;
+
+            for (int num : nums) {
+
+                if ((sum + num) <= mid) {
+                    sum += num;
+                } else {
+                    max = Math.max(max, sum);
+                    subArrCount++;
+                    sum = num;
+                }
+
+            }
+
+            if (subArrCount == k) {
+                right = mid;
+                ans = Math.max(ans, max);
+            } else {
+                right = mid - 1;
+            }
+
+
+
+        }
+
+        System.out.print(left + " " + right);
+        System.out.println();
 
         return 0;
+
     }
 
     public static void main(String[] args) {
 
-        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 2));
-        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 3));
+//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 1));
+//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 2));
+//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 3));
+        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 4));
+//        System.out.println(splitArray(new int[]{70, 2, 5, 10, 8}, 3));
+//        System.out.println(splitArray(new int[]{7, 2}, 2));
 //        System.out.println(splitArray(new int[]{7, 11, 5, 10, 8}, 3));
 //        System.out.println(splitArray(new int[]{1, 2, 3, 4, 5}, 2));
 
