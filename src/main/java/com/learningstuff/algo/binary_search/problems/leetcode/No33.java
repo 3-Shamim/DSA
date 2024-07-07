@@ -64,19 +64,17 @@ public class No33 {
 
         while (start < end) {
 
-            int mid = start + (end - start) / 2;
-
-            if (nums[start] > nums[mid]) {
-                end = mid - 1;
-            } else if (nums[start] < nums[mid]) {
-                start = mid;
+            if (nums[start] < nums[end]) {
+                return end;
             }
 
-//            if (nums[mid] < nums[mid + 1]) {
-//                start = mid + 1;
-//            } else {
-//                end = mid;
-//            }
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] > nums[start]) {
+                start = mid;
+            } else {
+                end = mid - 1;
+            }
 
         }
 
@@ -88,7 +86,11 @@ public class No33 {
         System.out.println(search(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
         System.out.println(search(new int[]{4, 5, 6, 7, 0, 1, 2}, 3));
         System.out.println(search(new int[]{1}, 0));
+        System.out.println(search(new int[]{6, 7, 1, 3, 4}, 0));
         System.out.println(search(new int[]{5, 7, 7, 8, 8, 10}, 8));
+        System.out.println(search(new int[]{2, 1}, 1));
+        System.out.println(search(new int[]{4, 4, 4, 7, 7, 7, 9, 9, 1, 1, 2, 2}, 1));
+        System.out.println(search(new int[]{4, 4, 4}, 1));
 
     }
 
