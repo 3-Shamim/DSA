@@ -81,64 +81,53 @@ public class No410 {
 
     public static int splitArray(int[] nums, int k) {
 
-        int left = 0, right = 0;
+        int start = 0, end = 0;
 
         for (int num : nums) {
 
-            if (left < num) {
-                left = num;
+            if (start < num) {
+                start = num;
             }
 
-            right += num;
+            end += num;
 
         }
 
-        int subArrCount = 0;
-        int ans = 0;
+        while (start < end) {
 
-        while (left <= right) {
+            int mid = start + (end - start) / 2;
 
-            int mid = left + (right - left) / 2;
-
+            int subArrCount = 1;
             int sum = 0;
-            int max = 0;
 
             for (int num : nums) {
 
-                if ((sum + num) <= mid) {
-                    sum += num;
-                } else {
-                    max = Math.max(max, sum);
+                if ((sum + num) > mid) {
                     subArrCount++;
                     sum = num;
+                } else {
+                    sum += num;
                 }
 
             }
 
-            if (subArrCount == k) {
-                right = mid;
-                ans = Math.max(ans, max);
+            if (subArrCount > k) {
+                start = mid + 1;
             } else {
-                right = mid - 1;
+                end = mid;
             }
-
-
 
         }
 
-        System.out.print(left + " " + right);
-        System.out.println();
-
-        return 0;
-
+        return end;
     }
 
     public static void main(String[] args) {
 
 //        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 1));
 //        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 2));
-//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 3));
-        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 4));
+        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 3));
+//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 4));
 //        System.out.println(splitArray(new int[]{70, 2, 5, 10, 8}, 3));
 //        System.out.println(splitArray(new int[]{7, 2}, 2));
 //        System.out.println(splitArray(new int[]{7, 11, 5, 10, 8}, 3));
