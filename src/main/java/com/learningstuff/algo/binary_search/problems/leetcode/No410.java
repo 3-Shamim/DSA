@@ -86,9 +86,7 @@ public class No410 {
 
         for (int num : nums) {
 
-            if (start < num) {
-                start = num;
-            }
+            start = Math.max(start, num);
 
             end += num;
 
@@ -125,14 +123,14 @@ public class No410 {
 
     public static void main(String[] args) {
 
-//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 1));
-//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 2));
+        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 1));
+        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 2));
         System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 3));
-//        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 4));
-//        System.out.println(splitArray(new int[]{70, 2, 5, 10, 8}, 3));
-//        System.out.println(splitArray(new int[]{7, 2}, 2));
-//        System.out.println(splitArray(new int[]{7, 11, 5, 10, 8}, 3));
-//        System.out.println(splitArray(new int[]{1, 2, 3, 4, 5}, 2));
+        System.out.println(splitArray(new int[]{7, 2, 5, 10, 8}, 4));
+        System.out.println(splitArray(new int[]{70, 2, 5, 10, 8}, 3));
+        System.out.println(splitArray(new int[]{7, 2}, 2));
+        System.out.println(splitArray(new int[]{7, 11, 5, 10, 8}, 3));
+        System.out.println(splitArray(new int[]{1, 2, 3, 4, 5}, 2));
 
     }
 
