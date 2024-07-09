@@ -79,6 +79,7 @@ public class No410 {
         return ans;
     }
 
+    // Solve with binary search
     public static int splitArray(int[] nums, int k) {
 
         int start = 0, end = 0;
