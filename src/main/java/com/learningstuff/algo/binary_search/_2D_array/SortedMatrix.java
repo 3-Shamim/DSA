@@ -14,18 +14,10 @@ public class SortedMatrix {
 
     static int[] searchInMatrix(int[][] matrix, int target) {
 
-        int row = 0, col = matrix.length - 1;
+        int row = findPossibleRowBS(matrix, target);
 
-        while (row < matrix.length && col >= 0) {
-
-            if (target > matrix[row][col]) {
-                row++;
-            } else if (target < matrix[row][0]) {
-                return new int[]{-1, -1};
-            } else {
-                break;
-            }
-
+        if (row == -1) {
+            return new int[]{-1, -1};
         }
 
         int resCol = binarySearch(matrix[row], target);
@@ -36,6 +28,50 @@ public class SortedMatrix {
 
         return new int[]{-1, -1};
 
+    }
+
+    static int findPossibleRowBS(int[][] matrix, int target) {
+
+        // Row: start and end
+        int start = 0, end = matrix.length - 1;
+
+        while (start <= end) {
+
+            // Mid row
+            int mid = start + (end - start) / 2;
+
+            if (target < matrix[mid][0]) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+
+        }
+
+        if (target < matrix[end][0] || target > matrix[end][matrix.length - 1]) {
+            return -1;
+        }
+
+        return end;
+    }
+
+    static int findPossibleRow(int[][] matrix, int target) {
+
+        int row = 0, col = matrix.length - 1;
+
+        while (row < matrix.length && col >= 0) {
+
+            if (target > matrix[row][col]) {
+                row++;
+            } else if (target < matrix[row][0]) {
+                return -1;
+            } else {
+                break;
+            }
+
+        }
+
+        return row;
     }
 
     static int binarySearch(int[] nums, int target) {
@@ -70,7 +106,7 @@ public class SortedMatrix {
 
         System.out.println(Arrays.toString(RowColSortedMatrix.searchInMatrix1(matrix, 14)));
         System.out.println(Arrays.toString(RowColSortedMatrix.searchInMatrix(matrix, 14)));
-        System.out.println(Arrays.toString(searchInMatrix(matrix, 14)));
+        System.out.println(Arrays.toString(searchInMatrix(matrix, 10)));
 
     }
 
