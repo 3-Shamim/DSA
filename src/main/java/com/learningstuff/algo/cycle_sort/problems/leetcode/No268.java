@@ -12,12 +12,12 @@ import java.util.Map;
  */
 
 /*
-* LeetCode: https://leetcode.com/problems/missing-number/description/
-* */
+ * LeetCode: https://leetcode.com/problems/missing-number/description/
+ * */
 
 public class No268 {
 
-    // Apply cycle code, Time O(n), Space O(1)
+    // Apply Cycle Sort, Time O(n), Space O(1)
     public static int missingNumber(int[] nums) {
 
         for (int i = 0; i < nums.length; i++) {
@@ -45,9 +45,10 @@ public class No268 {
         return nums.length;
     }
 
-    // Using HashMap, , Time O(n), Space O(n)
+    // Using HashMap, Time O(n), Space O(n)
     public static int missingNumberHM(int[] nums) {
 
+        // We can use Set also
         Map<Integer, Boolean> map = new HashMap<>();
 
         int max = -1;
@@ -68,7 +69,7 @@ public class No268 {
         return max + 1;
     }
 
-    // Nested loop, , Time O(n ^ 2), Space O(1)
+    // Using Nested Loop, Time O(n^2), Space O(1)
     public static int missingNumberN(int[] nums) {
 
         for (int i = 0; i <= nums.length; i++) {
@@ -93,7 +94,7 @@ public class No268 {
         return nums.length;
     }
 
-    // Custom approach (Best solution), Time O(n), Space O(1)
+    // Custom Approach (Best solution), Time O(n), Space O(1)
     public static int missingNumberC(int[] nums) {
 
         int max = nums.length;
