@@ -35,6 +35,7 @@ public class InsertionSort {
 
         System.out.println(Arrays.toString(insertionSort(new int[]{})));
         System.out.println(Arrays.toString(insertionSort(new int[]{-1})));
+        System.out.println(Arrays.toString(insertionSort(new int[]{4, 2, 1, 5, 3})));
         System.out.println(Arrays.toString(insertionSort(new int[]{5, 4, 3, 2, 1})));
         System.out.println(Arrays.toString(insertionSort(new int[]{1, 2, 3, 4, 5})));
         System.out.println(Arrays.toString(insertionSort(new int[]{4, 6, 3, 2, 1})));
