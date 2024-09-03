@@ -37,8 +37,80 @@ public class Pattern1 {
         pattern10(5);
         System.out.println();
         pattern11(5);
+        System.out.println();
+        pattern12(5);
+        System.out.println();
+        pattern13(5);
 
     }
+
+    private static void pattern13(int n) {
+
+        int colLen = (n * 2) - 1;
+
+        for (int i = 0; i < n; i++) {
+
+            for (int j = 0; j < colLen; j++) {
+
+                if (j >= i && j < (colLen - i)) {
+
+                    if (i % 2 == 0 && j % 2 == 0) {
+                        System.out.print("*");
+                        continue;
+                    }
+
+                    if (i % 2 != 0 && j % 2 != 0) {
+                        System.out.print("*");
+                        continue;
+                    }
+
+                }
+
+                System.out.print(" ");
+
+            }
+
+            System.out.println();
+
+        }
+
+    }
+
+    private static void pattern12(int n) {
+
+        int colLen = (n * 2) - 1;
+
+        for (int i = 0; i < n; i++) {
+
+            int l = (colLen / 2) - i;
+            int r = (colLen / 2) + i;
+
+            for (int j = 0; j < colLen; j++) {
+
+                if (j >= l && j <= r) {
+
+                    if (i % 2 == 0 && j % 2 == 0) {
+                        System.out.print("*");
+                        continue;
+                    }
+
+                    if (i % 2 != 0 && j % 2 != 0) {
+                        System.out.print("*");
+                        continue;
+                    }
+
+                }
+
+                System.out.print(" ");
+
+            }
+
+            System.out.println();
+
+        }
+
+    }
+
 
     private static void pattern11(int n) {
 
