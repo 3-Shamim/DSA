@@ -23,35 +23,37 @@ public class Pattern2 {
 
     private static void pattern3(int n) {
 
-        int len = n - 1;
-        int mid = (n - 1) / 2;
+        int len = n % 2 == 0 ? n - 1 : n;
+        int mid = len / 2;
 
         for (int i = 0; i < len; i++) {
 
-            int s = mid - i;
+            int s = Math.abs(mid - i);
             int c = (i + (i + 1));
 
             if (i > mid) {
-                s = len - (len - (i % mid));
+                c = (len - (s * 2));
             }
 
-            System.out.println(s);
-//            System.out.println(c);
+            for (int j = 0; j < len; j++) {
 
+                if (j >= s && j < (s + c)) {
 
-//            for (int j = 0; j < len; j++) {
-//
-//                if (j >= s && j <= (s + c)) {
-//
-//                    System.out.print("*");
-//
-//                } else {
-//
-//                    System.out.print(" ");
-//
-//                }
-//
-//            }
+                    if (j % 2 == 0 && i % 2 == 0) {
+                        System.out.print("*");
+                        continue;
+                    }
+
+                    if (j % 2 != 0 && i % 2 != 0) {
+                        System.out.print("*");
+                        continue;
+                    }
+
+                }
+
+                System.out.print(" ");
+
+            }
 
             System.out.println();
 
