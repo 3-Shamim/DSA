@@ -16,18 +16,67 @@ public class Pattern2 {
         System.out.println();
         pattern2(10);
         System.out.println();
+        pattern3(10);
+        System.out.println();
+
+    }
+
+    private static void pattern3(int n) {
+
+        int len = n - 1;
+        int mid = (n - 1) / 2;
+
+        for (int i = 0; i < len; i++) {
+
+            int s = mid - i;
+            int c = (i + (i + 1));
+
+            if (i > mid) {
+                s = len - (len - (i % mid));
+            }
+
+            System.out.println(s);
+//            System.out.println(c);
+
+
+//            for (int j = 0; j < len; j++) {
+//
+//                if (j >= s && j <= (s + c)) {
+//
+//                    System.out.print("*");
+//
+//                } else {
+//
+//                    System.out.print(" ");
+//
+//                }
+//
+//            }
+
+            System.out.println();
+
+        }
 
     }
 
     private static void pattern2(int n) {
 
-        for (int i = 0; i < n / 2; i++) {
+        int mid = n / 2;
+        int gapCount = 0;
 
-            int p = (n / 2) - i;
+        for (int i = 0; i < n; i++) {
+
+            if (i < mid) {
+                gapCount = 2 * i;
+            } else if (i != mid) {
+                gapCount -= 2;
+            }
+
+            int startPoint = mid - (gapCount / 2);
 
             for (int j = 0; j < n; j++) {
 
-                if (i > 0 && (j >= p && j < (p + (i * 2)))) {
+                if (j >= startPoint && j < (startPoint + gapCount)) {
                     System.out.print(" ");
                 } else {
                     System.out.print("*");
