@@ -47,20 +47,19 @@ public class Pattern2 {
 
         for (int row = 0; row < len; row++) {
 
-            int num = row >= n ? row - n + 2  : n - row;
+            int modifiableColCount = row < n ? row : len - row - 1;
+            int num = row < n ? n - row : (row % n) + 2;
 
-            for (int i = 0; i < len; i++) {
+            for (int col = 0; col < modifiableColCount; col++) {
+                System.out.print((n - col) + " ");
+            }
 
-                int match = i >= n ? len - i - 1 : i;
+            for (int col = 0; col < len - (modifiableColCount * 2); col++) {
+                System.out.print(num + " ");
+            }
 
-//                System.out.print(match);
-
-                if (match <= row) {
-                    System.out.print(num + match);
-                } else {
-                    System.out.print(num);
-                }
-
+            for (int col = 0; col < modifiableColCount; col++) {
+                System.out.print((n - col) + " ");
             }
 
             System.out.println();
@@ -73,7 +72,7 @@ public class Pattern2 {
 
         int len = 2 * n;
 
-        for (int row = 1; row <= len ; row++) {
+        for (int row = 1; row <= len; row++) {
 
             int cols = Math.abs(len - (row * 2));
             int star = (len - cols) / 2;
@@ -82,7 +81,7 @@ public class Pattern2 {
                 System.out.print("*");
             }
 
-            for (int i = 0; i < cols; i ++) {
+            for (int i = 0; i < cols; i++) {
                 System.out.print(" ");
             }
 
@@ -100,7 +99,7 @@ public class Pattern2 {
 
         int len = 2 * n;
 
-        for (int row = 1; row <= len ; row++) {
+        for (int row = 1; row <= len; row++) {
 
             int cols = row > n ? len - row : row;
             int spaces = n - cols;
@@ -109,7 +108,7 @@ public class Pattern2 {
                 System.out.print("  ");
             }
 
-            for (int col = cols;  col > 0; col--) {
+            for (int col = cols; col > 0; col--) {
                 System.out.print(col + " ");
             }
 
@@ -123,11 +122,11 @@ public class Pattern2 {
 
     }
 
-   private static void pattern7(int n) {
+    private static void pattern7(int n) {
 
         int len = 2 * n;
 
-        for (int row = 0; row < len ; row++) {
+        for (int row = 0; row < len; row++) {
 
             int cols = row * 2;
 
@@ -166,7 +165,7 @@ public class Pattern2 {
 
         int len = n * 2;
 
-        for (int row = n - 1; row > 0; row --) {
+        for (int row = n - 1; row > 0; row--) {
 
             int spaces = (len / 2) - row;
 
@@ -174,7 +173,7 @@ public class Pattern2 {
                 System.out.print("  ");
             }
 
-            for(int i = row; i > 0; i--) {
+            for (int i = row; i > 0; i--) {
                 System.out.print(i + " ");
             }
 
@@ -200,7 +199,7 @@ public class Pattern2 {
                 System.out.print("  ");
             }
 
-            for(int i = row; i > 0; i--) {
+            for (int i = row; i > 0; i--) {
                 System.out.print(i + " ");
             }
 
