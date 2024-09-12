@@ -26,11 +26,17 @@ public class Fibonacci {
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
 
+    // Formula: (((1 + sqrt(5)) / 2) ^ n - ((1 - sqrt(5)) / 2) ^ n) / sqrt(5)
+    static long fibonacciFormula(long n) {
+
+        return (int) ((Math.pow(((1 + Math.sqrt(5)) / 2), n) - Math.pow(((1 - Math.sqrt(5)) / 2), n)) / Math.sqrt(5));
+    }
 
     public static void main(String[] args) {
 
 //        System.out.println(fibonacci(50));
         System.out.println(fibonacci(5));
+        System.out.println(fibonacciFormula(5));
 
     }
 
