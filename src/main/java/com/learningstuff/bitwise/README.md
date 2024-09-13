@@ -33,4 +33,14 @@
     * Example:
       * a              = 10110
       * Complement (a) = 01001
-  * 
+  * Left shit (<<) operator:
+    * any number left shit by 1 will double the number
+      * 0 0 0 0 1 0 1 0 = 10 
+      * 0 0 0 1 0 1 0 0 = 20
+    * Formula:
+      * a << b = a * (2 ^ b)
+  * Right shit (>>) operator:
+    * any number right shit by 1 will divide the number by 2
+      * 0 0 0 1 0 1 0 0 = 20
+      * 0 0 0 0 1 0 1 0 = 10
+    * 
