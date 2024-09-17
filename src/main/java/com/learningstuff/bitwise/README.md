@@ -33,6 +33,9 @@
     * Example:
       * a              = 10110
       * Complement (a) = 01001
+    * 2's complement:
+      * adding 1 after complement call 2's complement
+      * It gives the negative number
   * Left shit (<<) operator:
     * any number left shit by 1 will double the number
       * 0 0 0 0 1 0 1 0 = 10 
