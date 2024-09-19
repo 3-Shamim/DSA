@@ -10,7 +10,24 @@ package com.learningstuff.bitwise;
 
 public class FindTheNumberOfSetBit {
 
+
     static int findNumberOfSetBit(int n) {
+
+        int ans = 0;
+
+
+
+        while (n > 0) {
+
+            n = n & (n - 1);
+            ans++;
+
+        }
+
+        return ans;
+    }
+
+    static int findNumberOfSetBitL(int n) {
 
         int ans = 0;
 
@@ -30,6 +47,7 @@ public class FindTheNumberOfSetBit {
     public static void main(String[] args) {
 
         System.out.println(findNumberOfSetBit(9));
+        System.out.println(findNumberOfSetBit(7));
 
     }
 
