@@ -10,12 +10,9 @@ package com.learningstuff.bitwise;
 
 public class FindTheNumberOfSetBit {
 
-
     static int findNumberOfSetBit(int n) {
 
         int ans = 0;
-
-
 
         while (n > 0) {
 
