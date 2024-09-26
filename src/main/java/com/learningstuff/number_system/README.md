@@ -22,3 +22,6 @@
     * Multiply & add the power of base with digits
   * Octal to Decimal
     * Multiply & add the power of base with digits
+
+* GCD / HFC
+* LCM
