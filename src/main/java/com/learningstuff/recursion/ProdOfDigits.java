@@ -8,20 +8,21 @@ package com.learningstuff.recursion;
  * Email: mdshamim723@gmail.com
  */
 
-public class SumOfDigits {
+public class ProdOfDigits {
 
-    static int sumOfDigits(int n) {
+    static int prodOfDigits(int n) {
 
         if (n == 0) {
-            return n;
+            return 1;
         }
 
-        return (n % 10) + sumOfDigits(n / 10);
+        return (n % 10) * prodOfDigits(n / 10);
     }
 
     public static void main(String[] args) {
 
-        System.out.println(sumOfDigits(1342));
+        System.out.println(prodOfDigits(1342));
+        System.out.println(prodOfDigits(405));
 
     }
 
