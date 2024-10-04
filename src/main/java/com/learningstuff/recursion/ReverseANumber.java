@@ -24,23 +24,23 @@ public class ReverseANumber {
 
     }
 
-    static void reverseNumber(int n, int rev) {
+    static int reverseNumber(int n, int rev) {
 
         if (n == 0) {
-            return;
+            return rev;
         }
 
-        reverseNumber(n / 10, (rev * 10) + (n % 10));
+        return reverseNumber(n / 10, (rev * 10) + (n % 10));
 
     }
 
     public static void main(String[] args) {
 
-        reverseNumber(2431);
+        reverseNumber(1234);
         System.out.println(ans);
 
         int ans1 = 0;
-        reverseNumber(1234, ans1);
+        ans1 = reverseNumber(1234, ans1);
         System.out.println(ans1);
 
     }
