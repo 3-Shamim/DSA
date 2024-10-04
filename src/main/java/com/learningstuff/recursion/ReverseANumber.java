@@ -10,18 +10,38 @@ package com.learningstuff.recursion;
 
 public class ReverseANumber {
 
-    static int reverseNumber(int n) {
+    static int ans = 0;
+
+    static void reverseNumber(int n) {
 
         if (n == 0) {
-            return 0;
+            return;
         }
 
-        return reverseNumber(n / 10) * 10 + (n % 10);
+        ans = (ans * 10) + (n % 10);
+
+        reverseNumber(n / 10);
+
+    }
+
+    static void reverseNumber(int n, int rev) {
+
+        if (n == 0) {
+            return;
+        }
+
+        reverseNumber(n / 10, (rev * 10) + (n % 10));
+
     }
 
     public static void main(String[] args) {
 
-        System.out.println(reverseNumber(2431));
+        reverseNumber(2431);
+        System.out.println(ans);
+
+        int ans1 = 0;
+        reverseNumber(1234, ans1);
+        System.out.println(ans1);
 
     }
 
