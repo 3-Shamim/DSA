@@ -24,24 +24,40 @@ public class ReverseANumber {
 
     }
 
-    static void reverseNumber(int n, int rev) {
+    static int reverseNumber(int n, int rev) {
 
         if (n == 0) {
-            return;
+            return rev;
         }
 
-        reverseNumber(n / 10, (rev * 10) + (n % 10));
+        return reverseNumber(n / 10, (rev * 10) + (n % 10));
+    }
 
+    static int reverseNumber1(int n) {
+
+        int digits = (int) Math.log10(n);
+
+        return helper(n, digits);
+    }
+
+    private static int helper(int n, int digits) {
+
+        if (n == 0) {
+            return 0;
+        }
+
+        return (n % 10) * (int) Math.pow(10, digits) + helper(n / 10, digits - 1);
     }
 
     public static void main(String[] args) {
 
-        reverseNumber(2431);
+        reverseNumber(1234);
         System.out.println(ans);
 
-        int ans1 = 0;
-        reverseNumber(1234, ans1);
-        System.out.println(ans1);
+        System.out.println(reverseNumber(1, 0));
+        System.out.println(reverseNumber(1234, 0));
+
+        System.out.println(reverseNumber1(1234));
 
     }
 
