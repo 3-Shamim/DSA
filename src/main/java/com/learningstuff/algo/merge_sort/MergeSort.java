@@ -22,7 +22,53 @@ public class MergeSort {
         mergeSort(arr, l, mid);
         mergeSort(arr, mid + 1, r);
 
-        System.out.printf("l=%d, r=%d\n", l, r);
+        merge(arr, l, mid, r);
+
+    }
+
+    private static void merge(int[] arr, int s, int lEnd, int rEnd) {
+
+        int lStart = s;
+        int rStart = lEnd + 1;
+        int index = 0;
+
+        int[] sorted = new int[rEnd - lStart + 1];
+
+        while (lStart <= lEnd && rStart <= rEnd) {
+
+            if (arr[lStart] <= arr[rStart]) {
+                sorted[index] = arr[lStart];
+                lStart++;
+            } else {
+                sorted[index] = arr[rStart];
+                rStart++;
+            }
+
+            index++;
+
+        }
+
+        if (lStart <= lEnd) {
+
+            while (lStart <= lEnd) {
+                sorted[index] = arr[lStart];
+                lStart++;
+                index++;
+            }
+
+        }
+
+        if (rStart <= rEnd) {
+
+            while (rStart <= rEnd) {
+                sorted[index] = arr[rStart];
+                rStart++;
+                index++;
+            }
+
+        }
+
+        System.arraycopy(sorted, 0, arr, s, sorted.length);
 
     }
 
@@ -94,6 +140,10 @@ public class MergeSort {
         int[] arr1 = {2, 3, 1};
         mergeSort(arr1, 0, arr1.length - 1);
         System.out.println(Arrays.toString(arr1));
+
+        int[] arr3 = {5, 4, 3, 2, 1};
+        mergeSort(arr3, 0, arr3.length - 1);
+        System.out.println(Arrays.toString(arr3));
 
 
     }
