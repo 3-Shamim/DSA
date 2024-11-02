@@ -141,9 +141,17 @@ public class MergeSort {
         mergeSort(arr1, 0, arr1.length - 1);
         System.out.println(Arrays.toString(arr1));
 
+        int[] arr2 = new int[]{2, 4, 6, 1, 7, 3};
+        mergeSort(arr2, 0, arr2.length - 1);
+        System.out.println(Arrays.toString(arr2));
+
         int[] arr3 = {5, 4, 3, 2, 1};
         mergeSort(arr3, 0, arr3.length - 1);
         System.out.println(Arrays.toString(arr3));
+
+        int[] arr4 = {3, 2, 4, 6, 6, 4, 2, 3, 8, 7};
+        mergeSort(arr4, 0, arr4.length - 1);
+        System.out.println(Arrays.toString(arr4));
 
 
     }
