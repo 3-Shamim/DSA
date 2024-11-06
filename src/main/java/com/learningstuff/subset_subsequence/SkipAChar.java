@@ -1,4 +1,4 @@
-package com.learningstuff.subset_subsequence_string;
+package com.learningstuff.subset_subsequence;
 
 /**
  * Created by IntelliJ IDEA.
