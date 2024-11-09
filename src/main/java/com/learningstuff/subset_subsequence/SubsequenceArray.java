@@ -32,7 +32,9 @@ public class SubsequenceArray {
 
         for (Integer integer : list) {
 
-            for (int i = 0; i < seq3.size(); i++) {
+            int size = seq3.size();
+
+            for (int i = 0; i < size; i++) {
 
                 List<Integer> integers = seq3.get(i);
                 seq3.add(new ArrayList<>(integers));
@@ -46,7 +48,7 @@ public class SubsequenceArray {
 
     }
 
-    private static void subsequence(List<Integer> list, int i, ArrayList<Integer> res) {
+    private static void subsequence(List<Integer> list, int i, List<Integer> res) {
 
         if (i == list.size()) {
             System.out.println(res);
