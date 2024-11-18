@@ -1,7 +1,5 @@
 package com.learningstuff.backtracking;
 
-import java.util.Arrays;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim
@@ -11,28 +9,35 @@ import java.util.Arrays;
 
 public class NQueens {
 
-    private static void nQueens(boolean[][] board, int row) {
+    private static int nQueens(boolean[][] board, int row) {
 
         if (row >= board.length) {
 
             for (boolean[] bR : board) {
-                System.out.println(Arrays.toString(bR));
+                for (boolean bC : bR) {
+                    System.out.print(bC ? "Q" : "X");
+                    System.out.print(" ");
+                }
+                System.out.println();
             }
-            System.out.println("=====================");
+            System.out.println();
 
-            return;
+            return 1;
         }
+
+        int count = 0;
 
         for (int col = 0; col < board.length; col++) {
 
             if (isQueenSafe(board, row, col)) {
                 board[row][col] = true;
-                nQueens(board, row + 1);
+                count += nQueens(board, row + 1);
                 board[row][col] = false;
             }
 
         }
 
+        return count;
     }
 
     private static boolean isQueenSafe(boolean[][] board, int row, int col) {
@@ -45,19 +50,19 @@ public class NQueens {
 
         }
 
-        for (int i = 0; i < Math.min(row, col); i++) {
+        for (int i = 1; i <= Math.min(row, col); i++) {
 
-            if (board[row - (i + 1)][col - (i + 1)]) {
+            if (board[row - i][col - i]) {
                 return false;
             }
 
         }
 
-        for (int i = Math.max(row, col) + 1; i < board.length; i++) {
+        int len = Math.min(row, board.length - 1 - col);
 
-            int
+        for (int i = 1; i <= len; i++) {
 
-            if (board[board.length - i][]) {
+            if (board[row - i][col + i]) {
                 return false;
             }
 
@@ -72,7 +77,7 @@ public class NQueens {
 
         boolean[][] board = new boolean[n][n];
 
-        nQueens(board, 0);
+        System.out.println(nQueens(board, 0));
 
     }
 
