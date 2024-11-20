@@ -12,16 +12,8 @@ public class NQueens {
     private static int nQueens(boolean[][] board, int row) {
 
         if (row >= board.length) {
-
-            for (boolean[] bR : board) {
-                for (boolean bC : bR) {
-                    System.out.print(bC ? "Q" : "X");
-                    System.out.print(" ");
-                }
-                System.out.println();
-            }
+            display(board);
             System.out.println();
-
             return 1;
         }
 
@@ -69,6 +61,16 @@ public class NQueens {
         }
 
         return true;
+    }
+
+    private static void display(boolean[][] board) {
+        for (boolean[] bR : board) {
+            for (boolean bC : bR) {
+                System.out.print(bC ? "Q" : "X");
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
