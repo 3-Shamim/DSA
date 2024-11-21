@@ -17,11 +17,64 @@ public class No37 {
 
     public static void solveSudoku(char[][] board) {
 
-        helper(board, 0, 0);
+//        allSudoku(board, 0, 0);
+
+        sudokuSolver(board);
+        display(board);
 
     }
 
-    private static void helper(char[][] board, int row, int col) {
+    private static boolean sudokuSolver(char[][] board) {
+
+        int len = board.length;
+        int row = 0;
+        int col = 0;
+
+        boolean completed = true;
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+
+                row = i;
+                col = j;
+
+                if (board[i][j] == '.') {
+                    completed = false;
+                    break;
+                }
+
+            }
+
+            if (!completed) {
+                break;
+            }
+
+        }
+
+        if (completed) {
+            return true;
+        }
+
+        for (int n = 1; n <= len; n++) {
+
+            char cN = (char) (n + '0');
+
+            if (isSafe(board, row, col, cN)) {
+                board[row][col] = cN;
+                if (sudokuSolver(board)) {
+                    return true;
+                } else {
+                    board[row][col] = cN;
+                }
+            }
+
+        }
+
+
+        return false;
+    }
+
+    private static void allSudoku(char[][] board, int row, int col) {
 
         if (row == board.length - 1 && col == board.length) {
             display(board);
@@ -30,7 +83,7 @@ public class No37 {
         }
 
         if (col == board.length) {
-            helper(board, row + 1, 0);
+            allSudoku(board, row + 1, 0);
             return;
         }
 
@@ -45,7 +98,7 @@ public class No37 {
                 if (isSafe(board, row, col, cN)) {
 
                     board[row][col] = cN;
-                    helper(board, row, col + 1);
+                    allSudoku(board, row, col + 1);
                     board[row][col] = c;
 
                 }
@@ -53,7 +106,7 @@ public class No37 {
             }
 
         } else {
-            helper(board, row, col + 1);
+            allSudoku(board, row, col + 1);
         }
 
     }
@@ -82,11 +135,45 @@ public class No37 {
 
         }
 
-//        int sqrt = (int) Math.sqrt(board.length);
-//
-//        while (sqrt)
+        // Sub box len
+        int subBoxLen = (int) Math.sqrt(board.length);
+
+        int[] subBoxIndex = findSubBoxIndex(row, col, subBoxLen);
+
+        for (int i = 0; i < subBoxLen; i++) {
+
+            for (int j = 0; j < subBoxLen; j++) {
+
+                if (board[i + subBoxIndex[0]][j + subBoxIndex[1]] == n) {
+                    return false;
+                }
+
+            }
+
+        }
 
         return true;
+    }
+
+    private static int[] findSubBoxIndex(int row, int col, int subBoxLen) {
+
+        int i = row - (row % subBoxLen);
+        int j = col - (col % subBoxLen);
+
+        return new int[]{i, j};
+    }
+
+    private static int[] findSubBoxIndex(int row, int col, int len, int subBoxLen) {
+
+        for (int i = 0; i < len; i = i + subBoxLen) {
+            for (int j = 0; j < len; j = j + subBoxLen) {
+                if (row >= i && row < (i + subBoxLen) && col >= j && col < (j + subBoxLen)) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+
+        return new int[]{-1, -1};
     }
 
     public static void main(String[] args) {
