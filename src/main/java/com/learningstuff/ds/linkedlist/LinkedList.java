@@ -8,8 +8,30 @@ package com.learningstuff.ds.linkedlist;
  * Email: mdshamim723@gmail.com
  */
 
-public class LinkedList {
+public interface LinkedList<T> {
 
+    void addFirst(T data);
 
+    void addLast(T data);
+
+    void addAtIndex(int index, T data);
+
+    int getIndex(T data);
+
+    T getByIndex(int index);
+
+    T get(T data);
+
+    int getSize();
+
+    void removeFirst();
+
+    void remove(T data);
+
+    void clear();
+
+    boolean isEmpty();
+
+    void print();
 
 }
