@@ -18,8 +18,10 @@ public class No37 {
     public static void solveSudoku(char[][] board) {
 
 //        allSudoku(board, 0, 0);
+//        sudokuSolver(board, 0, 0);
 
         sudokuSolver(board);
+
         display(board);
 
     }
@@ -33,6 +35,7 @@ public class No37 {
         boolean completed = true;
 
         for (int i = 0; i < board.length; i++) {
+
             for (int j = 0; j < board[0].length; j++) {
 
                 row = i;
@@ -70,6 +73,43 @@ public class No37 {
 
         }
 
+
+        return false;
+    }
+
+    private static boolean sudokuSolver(char[][] board, int row, int col) {
+
+        if (row == board.length - 1 && col == board.length) {
+            return true;
+        }
+
+        if (col == board.length) {
+            return sudokuSolver(board, row + 1, 0);
+        }
+
+        char c = board[row][col];
+
+        if (c == '.') {
+
+            for (int n = 1; n <= board.length; n++) {
+
+                char cN = (char) (n + '0');
+
+                if (isSafe(board, row, col, cN)) {
+
+                    board[row][col] = cN;
+                    if (sudokuSolver(board, row, col + 1)) {
+                        return true;
+                    }
+                    board[row][col] = c;
+
+                }
+
+            }
+
+        } else {
+            return sudokuSolver(board, row, col + 1);
+        }
 
         return false;
     }
