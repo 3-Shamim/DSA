@@ -226,4 +226,9 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
 
     }
 
+    @Override
+    public void printTail() {
+        System.out.println(tail);
+    }
+
 }

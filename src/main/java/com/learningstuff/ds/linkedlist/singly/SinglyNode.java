@@ -33,4 +33,11 @@ public class SinglyNode<T> {
         this.next = next;
     }
 
+    @Override
+    public String toString() {
+        return "SinglyNode{" +
+                "data=" + data +
+                ", next=" + (next == null ? "" : next.getData()) +
+                '}';
+    }
 }

@@ -34,4 +34,6 @@ public interface LinkedList<T> {
 
     void print();
 
+    void printTail();
+
 }
