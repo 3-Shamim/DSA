@@ -1,5 +1,6 @@
 package com.learningstuff.ds.linkedlist;
 
+import com.learningstuff.ds.linkedlist.doubly.DoublyLinkedList;
 import com.learningstuff.ds.linkedlist.doubly.DoublyLinkedListImpl;
 import com.learningstuff.ds.linkedlist.singly.SinglyLinkedListImpl;
 
@@ -21,7 +22,7 @@ public class Main {
 
     private static void doubly() {
 
-        LinkedList<Integer> l = new DoublyLinkedListImpl<>();
+        DoublyLinkedList<Integer> l = new DoublyLinkedListImpl<>();
 
         l.addFirst(1);
         l.addFirst(2);
@@ -57,6 +58,9 @@ public class Main {
         System.out.println(l.getSize());
         System.out.println(l.getIndex(2));
         System.out.println(l.getByIndex(l.getIndex(2)));
+
+        l.print();
+        l.printReverse();
 
     }
 

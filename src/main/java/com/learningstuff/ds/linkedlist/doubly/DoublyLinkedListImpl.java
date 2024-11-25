@@ -1,7 +1,5 @@
 package com.learningstuff.ds.linkedlist.doubly;
 
-import com.learningstuff.ds.linkedlist.LinkedList;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim
@@ -9,7 +7,7 @@ import com.learningstuff.ds.linkedlist.LinkedList;
  * Email: mdshamim723@gmail.com
  */
 
-public class DoublyLinkedListImpl<T> implements LinkedList<T> {
+public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
 
     private DoublyNode<T> head;
     private DoublyNode<T> tail;
@@ -234,5 +232,34 @@ public class DoublyLinkedListImpl<T> implements LinkedList<T> {
 
     }
 
+
+    @Override
+    public void printReverse() {
+
+        DoublyNode<T> pre = tail;
+        while (pre != null) {
+            System.out.print(pre.getData() + " -> ");
+            pre = pre.getPrevious();
+        }
+
+        // Using Recursion
+//        DoublyNode<T> current = head;
+//        printReverse(current);
+
+        System.out.println("START");
+
+    }
+
+    private void printReverse(DoublyNode<T> current) {
+
+        if (current == null) {
+            return;
+        }
+
+        printReverse(current.getNext());
+
+        System.out.print(current.getData() + " -> ");
+
+    }
 
 }
