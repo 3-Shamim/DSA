@@ -151,11 +151,13 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
     }
 
     @Override
-    public void removeFirst() {
+    public T removeFirst() {
 
         if (head == null) {
-            return;
+            return null;
         }
+
+        T data = head.getData();
 
         head = head.getNext();
         size--;
@@ -164,6 +166,7 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
             tail = null;
         }
 
+        return data;
     }
 
     @Override

@@ -24,7 +24,7 @@ public interface LinkedList<T> {
 
     int getSize();
 
-    void removeFirst();
+    T removeFirst();
 
     void remove(T data);
 
