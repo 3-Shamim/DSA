@@ -12,6 +12,10 @@ public class SinglyNode<T> {
     private T data;
     private SinglyNode<T> next;
 
+    public SinglyNode(T data) {
+        this.data = data;
+    }
+
     public SinglyNode(T data, SinglyNode<T> next) {
         this.data = data;
         this.next = next;

@@ -9,6 +9,7 @@ import com.learningstuff.ds.linkedlist.singly.SinglyNode;
  * Date: 11/23/24
  * Email: mdshamim723@gmail.com
  */
+
 public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
     private SinglyNode<T> head;
@@ -22,6 +23,8 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
         if (head == null) {
             tail = node;
+        } else {
+            tail.setNext(node);
         }
 
         head = node;
@@ -38,7 +41,7 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
             return;
         }
 
-        SinglyNode<T> node = new SinglyNode<>(data, null);
+        SinglyNode<T> node = new SinglyNode<>(data, tail.getNext());
         tail.setNext(node);
         tail = node;
 
@@ -165,6 +168,8 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
         if (head == null) {
             tail = null;
+        } else {
+            tail.setNext(head);
         }
 
         return data;
@@ -197,8 +202,14 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
         }
 
+        if (current == tail) {
+            tail = previous;
+        }
+
         if (head == null) {
             tail = null;
+        } else {
+            tail.setNext(head);
         }
 
 
@@ -219,12 +230,26 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void print() {
 
+        int i = 0;
         SinglyNode<T> current = head;
 
-        while (current != null) {
+        while (i <= size) {
             System.out.print(current.getData() + " -> ");
             current = current.getNext();
+            i++;
         }
+
+//        SinglyNode<T> current = head;
+//
+//        do {
+//            System.out.print(current.getData() + " -> ");
+//            current = current.getNext();
+//        } while (current != head);
+
+//        while (current != tail) {
+//            System.out.print(current.getData() + " -> ");
+//            current = current.getNext();
+//        }
 
         System.out.println("END");
 
