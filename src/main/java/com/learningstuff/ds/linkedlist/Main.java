@@ -27,6 +27,11 @@ public class Main {
         LinkedList<Integer> l = new CircularLinkedListImpl<>();
 
         l.addFirst(1);
+        l.print();
+        l.remove(1);
+        l.print();
+
+        l.addFirst(1);
         l.addFirst(2);
 
         l.addLast(3);
@@ -35,11 +40,14 @@ public class Main {
 
         l.print();
 
-        l.addAtIndex(2, 8);
+        l.addAtIndex(2, 6);
+        l.addAtIndex(0, 8);
+        l.addAtIndex(7, 9);
 
         l.print();
 
         l.remove(3);
+        l.remove(9);
 
         l.print();
 
@@ -48,6 +56,15 @@ public class Main {
         System.out.println("Remove: " + l.removeFirst());
         System.out.println("Remove: " + l.removeFirst());
         System.out.println("Remove: " + l.removeFirst());
+        System.out.println("Remove: " + l.removeFirst());
+        System.out.println("Remove: " + l.removeFirst());
+        System.out.println("Remove: " + l.removeFirst());
+
+        l.print();
+
+        l.addFirst(5);
+
+        l.print();
 
         l.remove(5);
 

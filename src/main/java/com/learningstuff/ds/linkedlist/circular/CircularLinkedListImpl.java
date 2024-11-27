@@ -19,11 +19,13 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void addFirst(T data) {
 
-        SinglyNode<T> node = new SinglyNode<>(data, head);
+        SinglyNode<T> node = new SinglyNode<>(data);
 
         if (head == null) {
+            node.setNext(node);
             tail = node;
         } else {
+            node.setNext(head);
             tail.setNext(node);
         }
 
@@ -41,7 +43,7 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
             return;
         }
 
-        SinglyNode<T> node = new SinglyNode<>(data, tail.getNext());
+        SinglyNode<T> node = new SinglyNode<>(data, head);
         tail.setNext(node);
         tail = node;
 
@@ -163,14 +165,15 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
         T data = head.getData();
 
-        head = head.getNext();
-        size--;
-
-        if (head == null) {
-            tail = null;
-        } else {
-            tail.setNext(head);
+        if (head.equals(head.getNext())) {
+            clear();
+            return data;
         }
+
+        head = head.getNext();
+        tail.setNext(head);
+
+        size--;
 
         return data;
     }
@@ -178,39 +181,46 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void remove(T data) {
 
+        if (head == null) {
+            return;
+        }
+
         SinglyNode<T> current = head;
         SinglyNode<T> previous = null;
 
-        while (current != null) {
+        do {
 
             if (data == current.getData()) {
 
+                if (current.equals(current.getNext())) {
+                    clear();
+                    break;
+                }
+
                 if (previous == null) {
-                    head = current.getNext();
+
+                    head = head.getNext();
+                    tail.setNext(head);
+
                 } else {
+
                     previous.setNext(current.getNext());
+
+                    if (current.getNext().equals(head)) {
+                        tail = previous;
+                    }
+
                 }
 
                 size--;
 
                 break;
-
             }
 
             previous = current;
             current = current.getNext();
 
-        }
-
-        if (current == tail) {
-            tail = previous;
-        }
-
-        if (head == null) {
-            tail = null;
-        } else {
-            tail.setNext(head);
-        }
+        } while (current != head);
 
 
     }
@@ -230,26 +240,16 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void print() {
 
-        int i = 0;
-        SinglyNode<T> current = head;
-
-        while (i <= size) {
-            System.out.print(current.getData() + " -> ");
-            current = current.getNext();
-            i++;
+        if (head == null) {
+            return;
         }
 
-//        SinglyNode<T> current = head;
-//
-//        do {
-//            System.out.print(current.getData() + " -> ");
-//            current = current.getNext();
-//        } while (current != head);
+        SinglyNode<T> current = head;
 
-//        while (current != tail) {
-//            System.out.print(current.getData() + " -> ");
-//            current = current.getNext();
-//        }
+        do {
+            System.out.print(current.getData() + " -> ");
+            current = current.getNext();
+        } while (current != head);
 
         System.out.println("END");
 
