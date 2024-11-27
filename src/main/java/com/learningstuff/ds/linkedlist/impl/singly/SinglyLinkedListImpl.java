@@ -1,31 +1,30 @@
-package com.learningstuff.ds.linkedlist.doubly;
+package com.learningstuff.ds.linkedlist.impl.singly;
+
+import com.learningstuff.ds.linkedlist.LinkedList;
 
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim
- * Date: 11/25/24
+ * Date: 11/23/24
  * Email: mdshamim723@gmail.com
  */
+public class SinglyLinkedListImpl<T> implements LinkedList<T> {
 
-public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
-
-    private DoublyNode<T> head;
-    private DoublyNode<T> tail;
+    private SinglyNode<T> head;
+    private SinglyNode<T> tail;
     private int size;
 
     @Override
     public void addFirst(T data) {
 
-        DoublyNode<T> node = new DoublyNode<>(data);
+        SinglyNode<T> node = new SinglyNode<>(data, head);
 
         if (head == null) {
             tail = node;
-        } else {
-            head.setPrevious(node);
-            node.setNext(head);
         }
 
         head = node;
+
         size++;
 
     }
@@ -33,16 +32,15 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     @Override
     public void addLast(T data) {
 
-        DoublyNode<T> node = new DoublyNode<>(data);
-
         if (head == null) {
-            head = node;
-        } else {
-            tail.setNext(node);
-            node.setPrevious(tail);
+            addFirst(data);
+            return;
         }
 
+        SinglyNode<T> node = new SinglyNode<>(data, null);
+        tail.setNext(node);
         tail = node;
+
         size++;
 
     }
@@ -51,60 +49,59 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     public void addAtIndex(int index, T data) {
 
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException(
+                    "Index out of bounds. Current size is " + size
+            );
         }
 
         if (index == 0) {
             addFirst(data);
+            return;
         }
 
         if (index == size) {
             addLast(data);
+            return;
         }
 
+        SinglyNode<T> current = head;
+
         int i = 0;
-        DoublyNode<T> current = head;
 
         while (current != null) {
 
             if (i == index - 1) {
-
-                DoublyNode<T> node = new DoublyNode<>(data);
-                node.setPrevious(current);
-                DoublyNode<T> cNext = current.getNext();
-                node.setNext(cNext);
-
-                if (cNext != null) {
-                    cNext.setPrevious(node);
-                }
-
+                SinglyNode<T> node = new SinglyNode<>(data, current.getNext());
                 current.setNext(node);
-
                 break;
             }
 
-            i++;
             current = current.getNext();
+            i++;
         }
+
+        size++;
 
     }
 
     @Override
     public int getIndex(T data) {
 
-        DoublyNode<T> current = head;
-
         int index = 0;
+
+        SinglyNode<T> current = head;
 
         while (current != null) {
 
-            if (current.getData().equals(data)) {
+            if (data == current.getData()) {
                 return index;
             }
 
-            index++;
             current = current.getNext();
+            index++;
+
         }
+
 
         return -1;
     }
@@ -112,18 +109,19 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     @Override
     public T getByIndex(int index) {
 
-        DoublyNode<T> current = head;
+        int i = 0;
 
-        int _index = 0;
+        SinglyNode<T> current = head;
 
         while (current != null) {
 
-            if (_index == index) {
+            if (i == index) {
                 return current.getData();
             }
 
-            _index++;
             current = current.getNext();
+            i++;
+
         }
 
         return null;
@@ -132,15 +130,16 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     @Override
     public T get(T data) {
 
-        DoublyNode<T> current = head;
+        SinglyNode<T> current = head;
 
         while (current != null) {
 
-            if (current.getData().equals(data)) {
+            if (data == current.getData()) {
                 return current.getData();
             }
 
             current = current.getNext();
+
         }
 
         return null;
@@ -173,20 +172,23 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     @Override
     public void remove(T data) {
 
-        DoublyNode<T> current = head;
-        DoublyNode<T> previous = null;
+        SinglyNode<T> current = head;
+        SinglyNode<T> previous = null;
 
         while (current != null) {
 
-            if (current.getData().equals(data)) {
+            if (data == current.getData()) {
 
                 if (previous == null) {
-                    head = head.getNext();
+                    head = current.getNext();
                 } else {
                     previous.setNext(current.getNext());
                 }
 
+                size--;
+
                 break;
+
             }
 
             previous = current;
@@ -194,7 +196,10 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
 
         }
 
-        size--;
+        if (head == null) {
+            tail = null;
+        }
+
 
     }
 
@@ -202,6 +207,7 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     public void clear() {
         head = null;
         tail = null;
+        size = 0;
     }
 
     @Override
@@ -212,12 +218,10 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
     @Override
     public void print() {
 
-        DoublyNode<T> current = head;
+        SinglyNode<T> current = head;
 
         while (current != null) {
-
             System.out.print(current.getData() + " -> ");
-
             current = current.getNext();
         }
 
@@ -227,39 +231,7 @@ public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
 
     @Override
     public void printTail() {
-
         System.out.println(tail);
-
-    }
-
-
-    @Override
-    public void printReverse() {
-
-        DoublyNode<T> pre = tail;
-        while (pre != null) {
-            System.out.print(pre.getData() + " -> ");
-            pre = pre.getPrevious();
-        }
-
-        // Using Recursion
-//        DoublyNode<T> current = head;
-//        printReverse(current);
-
-        System.out.println("START");
-
-    }
-
-    private void printReverse(DoublyNode<T> current) {
-
-        if (current == null) {
-            return;
-        }
-
-        printReverse(current.getNext());
-
-        System.out.print(current.getData() + " -> ");
-
     }
 
 }

@@ -1,4 +1,4 @@
-package com.learningstuff.ds.linkedlist.singly;
+package com.learningstuff.ds.linkedlist.impl.singly;
 
 /**
  * Created by IntelliJ IDEA.

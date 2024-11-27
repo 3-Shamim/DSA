@@ -1,4 +1,4 @@
-package com.learningstuff.ds.linkedlist.doubly;
+package com.learningstuff.ds.linkedlist.impl.doubly;
 
 /**
  * Created by IntelliJ IDEA.

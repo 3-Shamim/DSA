@@ -1,36 +1,31 @@
-package com.learningstuff.ds.linkedlist.circular;
-
-import com.learningstuff.ds.linkedlist.LinkedList;
-import com.learningstuff.ds.linkedlist.singly.SinglyNode;
+package com.learningstuff.ds.linkedlist.impl.doubly;
 
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim
- * Date: 11/23/24
+ * Date: 11/25/24
  * Email: mdshamim723@gmail.com
  */
 
-public class CircularLinkedListImpl<T> implements LinkedList<T> {
+public class DoublyLinkedListImpl<T> implements DoublyLinkedList<T> {
 
-    private SinglyNode<T> head;
-    private SinglyNode<T> tail;
+    private DoublyNode<T> head;
+    private DoublyNode<T> tail;
     private int size;
 
     @Override
     public void addFirst(T data) {
 
-        SinglyNode<T> node = new SinglyNode<>(data);
+        DoublyNode<T> node = new DoublyNode<>(data);
 
         if (head == null) {
-            node.setNext(node);
             tail = node;
         } else {
+            head.setPrevious(node);
             node.setNext(head);
-            tail.setNext(node);
         }
 
         head = node;
-
         size++;
 
     }
@@ -38,15 +33,16 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void addLast(T data) {
 
+        DoublyNode<T> node = new DoublyNode<>(data);
+
         if (head == null) {
-            addFirst(data);
-            return;
+            head = node;
+        } else {
+            tail.setNext(node);
+            node.setPrevious(tail);
         }
 
-        SinglyNode<T> node = new SinglyNode<>(data, head);
-        tail.setNext(node);
         tail = node;
-
         size++;
 
     }
@@ -55,59 +51,60 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     public void addAtIndex(int index, T data) {
 
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException(
-                    "Index out of bounds. Current size is " + size
-            );
+            throw new IndexOutOfBoundsException();
         }
 
         if (index == 0) {
             addFirst(data);
-            return;
         }
 
         if (index == size) {
             addLast(data);
-            return;
         }
 
-        SinglyNode<T> current = head;
-
         int i = 0;
+        DoublyNode<T> current = head;
 
         while (current != null) {
 
             if (i == index - 1) {
-                SinglyNode<T> node = new SinglyNode<>(data, current.getNext());
+
+                DoublyNode<T> node = new DoublyNode<>(data);
+                node.setPrevious(current);
+                DoublyNode<T> cNext = current.getNext();
+                node.setNext(cNext);
+
+                if (cNext != null) {
+                    cNext.setPrevious(node);
+                }
+
                 current.setNext(node);
+
                 break;
             }
 
-            current = current.getNext();
             i++;
+            current = current.getNext();
         }
-
-        size++;
 
     }
 
     @Override
     public int getIndex(T data) {
 
-        int index = 0;
+        DoublyNode<T> current = head;
 
-        SinglyNode<T> current = head;
+        int index = 0;
 
         while (current != null) {
 
-            if (data == current.getData()) {
+            if (current.getData().equals(data)) {
                 return index;
             }
 
-            current = current.getNext();
             index++;
-
+            current = current.getNext();
         }
-
 
         return -1;
     }
@@ -115,19 +112,18 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public T getByIndex(int index) {
 
-        int i = 0;
+        DoublyNode<T> current = head;
 
-        SinglyNode<T> current = head;
+        int _index = 0;
 
         while (current != null) {
 
-            if (i == index) {
+            if (_index == index) {
                 return current.getData();
             }
 
+            _index++;
             current = current.getNext();
-            i++;
-
         }
 
         return null;
@@ -136,16 +132,15 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public T get(T data) {
 
-        SinglyNode<T> current = head;
+        DoublyNode<T> current = head;
 
         while (current != null) {
 
-            if (data == current.getData()) {
+            if (current.getData().equals(data)) {
                 return current.getData();
             }
 
             current = current.getNext();
-
         }
 
         return null;
@@ -165,15 +160,12 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
         T data = head.getData();
 
-        if (head.equals(head.getNext())) {
-            clear();
-            return data;
-        }
-
         head = head.getNext();
-        tail.setNext(head);
-
         size--;
+
+        if (head == null) {
+            tail = null;
+        }
 
         return data;
     }
@@ -181,38 +173,18 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void remove(T data) {
 
-        if (head == null) {
-            return;
-        }
+        DoublyNode<T> current = head;
+        DoublyNode<T> previous = null;
 
-        SinglyNode<T> current = head;
-        SinglyNode<T> previous = null;
+        while (current != null) {
 
-        do {
-
-            if (data == current.getData()) {
-
-                if (current.equals(current.getNext())) {
-                    clear();
-                    break;
-                }
+            if (current.getData().equals(data)) {
 
                 if (previous == null) {
-
                     head = head.getNext();
-                    tail.setNext(head);
-
                 } else {
-
                     previous.setNext(current.getNext());
-
-                    if (current.getNext().equals(head)) {
-                        tail = previous;
-                    }
-
                 }
-
-                size--;
 
                 break;
             }
@@ -220,8 +192,9 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
             previous = current;
             current = current.getNext();
 
-        } while (current != head);
+        }
 
+        size--;
 
     }
 
@@ -229,7 +202,6 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     public void clear() {
         head = null;
         tail = null;
-        size = 0;
     }
 
     @Override
@@ -240,16 +212,14 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void print() {
 
-        if (head == null) {
-            return;
-        }
+        DoublyNode<T> current = head;
 
-        SinglyNode<T> current = head;
+        while (current != null) {
 
-        do {
             System.out.print(current.getData() + " -> ");
+
             current = current.getNext();
-        } while (current != head);
+        }
 
         System.out.println("END");
 
@@ -257,7 +227,39 @@ public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
     @Override
     public void printTail() {
+
         System.out.println(tail);
+
+    }
+
+
+    @Override
+    public void printReverse() {
+
+        DoublyNode<T> pre = tail;
+        while (pre != null) {
+            System.out.print(pre.getData() + " -> ");
+            pre = pre.getPrevious();
+        }
+
+        // Using Recursion
+//        DoublyNode<T> current = head;
+//        printReverse(current);
+
+        System.out.println("START");
+
+    }
+
+    private void printReverse(DoublyNode<T> current) {
+
+        if (current == null) {
+            return;
+        }
+
+        printReverse(current.getNext());
+
+        System.out.print(current.getData() + " -> ");
+
     }
 
 }

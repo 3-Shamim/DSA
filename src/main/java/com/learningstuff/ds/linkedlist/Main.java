@@ -1,9 +1,9 @@
 package com.learningstuff.ds.linkedlist;
 
-import com.learningstuff.ds.linkedlist.circular.CircularLinkedListImpl;
-import com.learningstuff.ds.linkedlist.doubly.DoublyLinkedList;
-import com.learningstuff.ds.linkedlist.doubly.DoublyLinkedListImpl;
-import com.learningstuff.ds.linkedlist.singly.SinglyLinkedListImpl;
+import com.learningstuff.ds.linkedlist.impl.circular.CircularLinkedListImpl;
+import com.learningstuff.ds.linkedlist.impl.doubly.DoublyLinkedList;
+import com.learningstuff.ds.linkedlist.impl.doubly.DoublyLinkedListImpl;
+import com.learningstuff.ds.linkedlist.impl.singly.SinglyLinkedListImpl;
 
 /**
  * Created by IntelliJ IDEA.

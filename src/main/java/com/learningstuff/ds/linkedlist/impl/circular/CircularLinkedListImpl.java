@@ -1,6 +1,7 @@
-package com.learningstuff.ds.linkedlist.singly;
+package com.learningstuff.ds.linkedlist.impl.circular;
 
 import com.learningstuff.ds.linkedlist.LinkedList;
+import com.learningstuff.ds.linkedlist.impl.singly.SinglyNode;
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,7 +9,8 @@ import com.learningstuff.ds.linkedlist.LinkedList;
  * Date: 11/23/24
  * Email: mdshamim723@gmail.com
  */
-public class SinglyLinkedListImpl<T> implements LinkedList<T> {
+
+public class CircularLinkedListImpl<T> implements LinkedList<T> {
 
     private SinglyNode<T> head;
     private SinglyNode<T> tail;
@@ -17,10 +19,14 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void addFirst(T data) {
 
-        SinglyNode<T> node = new SinglyNode<>(data, head);
+        SinglyNode<T> node = new SinglyNode<>(data);
 
         if (head == null) {
+            node.setNext(node);
             tail = node;
+        } else {
+            node.setNext(head);
+            tail.setNext(node);
         }
 
         head = node;
@@ -37,7 +43,7 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
             return;
         }
 
-        SinglyNode<T> node = new SinglyNode<>(data, null);
+        SinglyNode<T> node = new SinglyNode<>(data, head);
         tail.setNext(node);
         tail = node;
 
@@ -159,12 +165,15 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
 
         T data = head.getData();
 
-        head = head.getNext();
-        size--;
-
-        if (head == null) {
-            tail = null;
+        if (head.equals(head.getNext())) {
+            clear();
+            return data;
         }
+
+        head = head.getNext();
+        tail.setNext(head);
+
+        size--;
 
         return data;
     }
@@ -172,33 +181,46 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void remove(T data) {
 
+        if (head == null) {
+            return;
+        }
+
         SinglyNode<T> current = head;
         SinglyNode<T> previous = null;
 
-        while (current != null) {
+        do {
 
             if (data == current.getData()) {
 
+                if (current.equals(current.getNext())) {
+                    clear();
+                    break;
+                }
+
                 if (previous == null) {
-                    head = current.getNext();
+
+                    head = head.getNext();
+                    tail.setNext(head);
+
                 } else {
+
                     previous.setNext(current.getNext());
+
+                    if (current.getNext().equals(head)) {
+                        tail = previous;
+                    }
+
                 }
 
                 size--;
 
                 break;
-
             }
 
             previous = current;
             current = current.getNext();
 
-        }
-
-        if (head == null) {
-            tail = null;
-        }
+        } while (current != head);
 
 
     }
@@ -218,12 +240,16 @@ public class SinglyLinkedListImpl<T> implements LinkedList<T> {
     @Override
     public void print() {
 
+        if (head == null) {
+            return;
+        }
+
         SinglyNode<T> current = head;
 
-        while (current != null) {
+        do {
             System.out.print(current.getData() + " -> ");
             current = current.getNext();
-        }
+        } while (current != head);
 
         System.out.println("END");
 
