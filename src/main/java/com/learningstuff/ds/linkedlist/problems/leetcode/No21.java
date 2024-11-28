@@ -69,15 +69,15 @@ public class No21 {
         ListNode l2 = null;
 
         l1 = addFirst(3, l1);
-//        l1 = addFirst(3, l1);
-//        l1 = addFirst(3, l1);
-//        l1 = addFirst(2, l1);
-//        l1 = addFirst(1, l1);
+        l1 = addFirst(3, l1);
+        l1 = addFirst(3, l1);
+        l1 = addFirst(2, l1);
+        l1 = addFirst(1, l1);
 
-//        l2 = addFirst(4, l2);
-//        l2 = addFirst(3, l2);
-//        l2 = addFirst(2, l2);
-//        l2 = addFirst(1, l2);
+        l2 = addFirst(4, l2);
+        l2 = addFirst(3, l2);
+        l2 = addFirst(2, l2);
+        l2 = addFirst(1, l2);
 
         display(l1);
         display(l2);
