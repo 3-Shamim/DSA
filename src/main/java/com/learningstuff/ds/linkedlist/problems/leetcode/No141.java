@@ -11,7 +11,7 @@ import java.util.Set;
  */
 
 /*
- * Leetcode: https://leetcode.com/problems/merge-two-sorted-lists/description/
+ * Leetcode: https://leetcode.com/problems/linked-list-cycle/description/
  * */
 
 public class No141 {
@@ -69,8 +69,6 @@ public class No141 {
 
         System.out.println(hasCycle(head));
 
-
     }
-
 
 }
