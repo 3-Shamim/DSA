@@ -10,7 +10,70 @@ package com.learningstuff.ds.linkedlist.problems.leetcode;
 public class No148 extends LinkedListOperation {
 
     public static ListNode sortList(ListNode head) {
+//        return bubbleSort(head);
         return mergeSort(head);
+    }
+
+    private static ListNode bubbleSort(ListNode head) {
+
+        boolean swap = false;
+
+        ListNode root = null;
+        ListNode t = null;
+
+        while (head != null) {
+
+            ListNode next = head.next;
+
+            if (next == null) {
+
+                if (root == null) {
+                    root = head;
+                } else {
+                    t.next = head;
+                }
+
+                t = head;
+                head = null;
+                continue;
+
+            }
+
+            if (head.val > next.val) {
+
+                if (root == null) {
+                    root = next;
+                } else {
+                    t.next = next;
+                }
+
+                t = next;
+
+                head.next = next.next;
+
+                swap = true;
+
+            } else {
+
+                if (root == null) {
+                    root = head;
+                } else {
+                    t.next = head;
+                }
+
+                t = head;
+
+                head = head.next;
+
+            }
+
+        }
+
+        if (swap) {
+            root = sortList(root);
+        }
+
+        return root;
     }
 
     private static ListNode mergeSort(ListNode head) {
@@ -23,10 +86,10 @@ public class No148 extends LinkedListOperation {
         ListNode left = mergeSort(head);
         ListNode right = mergeSort(mid);
 
-        return merge(left, right);
+        return mergeSortedArray(left, right);
     }
 
-    private static ListNode merge(ListNode l1, ListNode l2) {
+    private static ListNode mergeSortedArray(ListNode l1, ListNode l2) {
 
         ListNode h = null;
         ListNode tail = null;
