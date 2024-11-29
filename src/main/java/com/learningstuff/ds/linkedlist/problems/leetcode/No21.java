@@ -11,7 +11,7 @@ package com.learningstuff.ds.linkedlist.problems.leetcode;
  * Leetcode: https://leetcode.com/problems/merge-two-sorted-lists/description/
  * */
 
-public class No21 {
+public class No21 extends LinkedListOperation {
 
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
@@ -86,24 +86,6 @@ public class No21 {
 
         display(finalNode);
 
-    }
-
-    private static ListNode addFirst(int v, ListNode head) {
-
-        ListNode node = new ListNode(v);
-        node.next = head;
-
-        return node;
-    }
-
-    private static void display(ListNode head) {
-
-        while (head != null) {
-            System.out.print(head.val + " -> ");
-            head = head.next;
-        }
-
-        System.out.println("END");
     }
 
 }
