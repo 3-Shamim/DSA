@@ -17,6 +17,25 @@ public class LinkedListOperation {
         return node;
     }
 
+    public static ListNode addReverseElements(ListNode head, int k) {
+
+        for (int i = 1; i <= k; i++) {
+           head = addFirst(i, head);
+        }
+
+        return head;
+    }
+
+    public static ListNode addElements(ListNode head, int k) {
+
+        while (k > 0) {
+            head = addFirst(k, head);
+            k--;
+        }
+
+        return head;
+    }
+
     public static void display(ListNode head) {
 
         while (head != null) {
