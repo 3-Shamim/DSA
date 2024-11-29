@@ -11,6 +11,7 @@ import com.learningstuff.ds.linkedlist.problems.leetcode.ListNode;
 
 public class Reverse extends LinkedListOperation {
 
+    private static ListNode test;
 
     public static void main(String[] args) {
 
@@ -31,7 +32,7 @@ public class Reverse extends LinkedListOperation {
         }
 
         head = rev;
-        display(rev);
+        display(head);
 
         // Second way
         // User existing node (Memory efficient)
@@ -48,25 +49,8 @@ public class Reverse extends LinkedListOperation {
         }
 
         head = rev1;
-        display(rev1);
-
-        ListNode rev2 = reverse(head);
-//        display(rev2);
+        display(head);
 
     }
-
-    private static ListNode reverse(ListNode head) {
-
-        if (head == null || head.next == null) {
-            return head;
-        }
-
-        System.out.print(head + " - ");
-        ListNode node = reverse(head.next);
-        System.out.println(head);
-
-        return head;
-    }
-
 
 }
