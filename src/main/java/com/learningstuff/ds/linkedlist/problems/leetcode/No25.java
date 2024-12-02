@@ -13,6 +13,48 @@ package com.learningstuff.ds.linkedlist.problems.leetcode;
 
 public class No25 extends LinkedListOperation {
 
+    public static ListNode reverseKGroupR(ListNode head, int k) {
+
+        if (head == null) {
+            return null;
+        }
+
+        ListNode tail = head;
+
+        for (int i = 0; i < k; i++) {
+
+            if (tail == null) {
+                return head;
+            }
+
+            tail = tail.next;
+        }
+
+
+        ListNode rev = reverse(head, tail);
+
+        head.next = reverseKGroupR(tail, k);
+
+        return rev;
+    }
+
+    private static ListNode reverse(ListNode head, ListNode tail) {
+
+        ListNode rev = null;
+
+        while (head != tail) {
+
+            ListNode temp = head;
+            head = head.next;
+
+            temp.next = rev;
+            rev = temp;
+
+        }
+
+        return rev;
+    }
+
     public static ListNode reverseKGroup(ListNode head, int k) {
 
         // Partition head + tail
@@ -130,7 +172,7 @@ public class No25 extends LinkedListOperation {
 
         display(head);
 
-        head = reverseKGroup(head, 3);
+        head = reverseKGroupR(head, 2);
 
         display(head);
 
