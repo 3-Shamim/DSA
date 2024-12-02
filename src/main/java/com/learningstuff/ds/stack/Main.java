@@ -1,6 +1,6 @@
 package com.learningstuff.ds.stack;
 
-import java.util.*;
+import java.util.Stack;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,10 +51,7 @@ public class Main {
         System.out.println(dynamicStack.pop());
 
         // Java implementations
-        Deque<Integer> dequeArray = new ArrayDeque<>();
-        Deque<Integer> dequeLinkedList = new LinkedList<>();
         Stack<Integer> stack = new Stack<>();
-        Queue<Integer> queue = new LinkedList<>();
 
     }
 
