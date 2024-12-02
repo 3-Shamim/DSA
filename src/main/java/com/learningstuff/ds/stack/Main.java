@@ -1,5 +1,7 @@
 package com.learningstuff.ds.stack;
 
+import java.util.*;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim Molla
@@ -10,19 +12,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        CustomStack<Integer> stack = new CustomStack<>(3);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
+        CustomStack<Integer> customStack = new CustomStack<>(3);
+        customStack.push(1);
+        customStack.push(2);
+        customStack.push(3);
+        customStack.push(4);
 
-        System.out.println(stack.peek());
+        System.out.println(customStack.peek());
 
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
+        System.out.println(customStack.pop());
+        System.out.println(customStack.pop());
+        System.out.println(customStack.pop());
 
-        System.out.println(stack.pop());
+        System.out.println(customStack.pop());
 
         System.out.println();
         System.out.println("==============================================");
@@ -47,6 +49,12 @@ public class Main {
         System.out.println(dynamicStack.pop());
         System.out.println(dynamicStack.pop());
         System.out.println(dynamicStack.pop());
+
+        // Java implementations
+        Deque<Integer> dequeArray = new ArrayDeque<>();
+        Deque<Integer> dequeLinkedList = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
+        Queue<Integer> queue = new LinkedList<>();
 
     }
 
