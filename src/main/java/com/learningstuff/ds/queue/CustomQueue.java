@@ -1,64 +1,76 @@
 package com.learningstuff.ds.queue;
 
-import com.learningstuff.ds.linkedlist.impl.singly.SinglyNode;
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Md. Shamim Molla
- * Email: shamim.molla@vivasoftltd.com
+ * User: Md. Shamim
+ * Date: 12/2/24
+ * Email: mdshamim723@gmail.com
  */
 
 public class CustomQueue<T> {
 
-    private SinglyNode<T> head = null;
-    private SinglyNode<T> tail = null;
+    private final Object[] elements;
+    private int end = 0;
 
-    public void add(T data) {
+    public CustomQueue() {
+        elements = new Object[10];
+    }
 
-        if (tail == null) {
-            head = new SinglyNode<>(data);
-            tail = head;
-        } else {
-            SinglyNode<T> node = new SinglyNode<>(data);
-            tail.setNext(node);
-            tail = node;
+    public CustomQueue(int size) {
+        elements = new Object[size];
+    }
+
+    public void add(T data) throws Exception {
+
+        if (isFull()) {
+            throw new Exception("Queue is full");
         }
+
+        elements[end] = data;
+        end++;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T remove() throws Exception {
+
+        if (isEmpty()) {
+            throw new Exception("Queue is empty");
+        }
+
+        T data = (T) elements[0];
+
+        for (int i = 1; i < end; i++) {
+            elements[i - 1] = elements[i];
+        }
+
+        end--;
+
+        return data;
 
     }
 
-    public T peek() {
+    @SuppressWarnings("unchecked")
+    public T peek() throws Exception {
 
-        if (head == null) {
-            System.out.println("Queue is empty");
-            return null;
+        if (isEmpty()) {
+            throw new Exception("Queue is empty");
         }
 
-        return head.getData();
+        return (T) elements[0];
     }
 
-    public T remove() {
+    public boolean isFull() {
+        return end == elements.length;
+    }
 
-        if (head == null) {
-            System.out.println("Queue is empty");
-            return null;
-        }
-
-        SinglyNode<T> node = head;
-        head = head.getNext();
-
-        return node.getData();
+    public boolean isEmpty() {
+        return end == 0;
     }
 
     public void display() {
-
-        SinglyNode<T> current = head;
-
-        while (current != null) {
-            System.out.print(current.getData() + " -> ");
-            current = current.getNext();
-        }
-
-        System.out.println("END");
+        System.out.println("Queue is: " + Arrays.toString(elements));
     }
 
 }
