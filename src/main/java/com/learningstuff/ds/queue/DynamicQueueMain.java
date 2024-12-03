@@ -7,11 +7,11 @@ package com.learningstuff.ds.queue;
  * Email: mdshamim723@gmail.com
  */
 
-public class CircularQueueMain {
+public class DynamicQueueMain {
 
     public static void main(String[] args) {
 
-        CircularQueue<Integer> circularQueue = new CircularQueue<>(5);
+        DynamicQueue<Integer> circularQueue = new DynamicQueue<>(5);
 
         System.out.println("Add: " + circularQueue.add(1));
         System.out.println("Add: " + circularQueue.add(2));

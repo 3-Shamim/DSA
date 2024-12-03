@@ -20,17 +20,23 @@ public class DynamicQueue<T> extends CircularQueue<T> {
     @Override
     public boolean add(T data) {
 
-        if (super.isFull()) {
+        if (isFull()) {
 
-            super.capacity = super.capacity * 2;
+            capacity = capacity * 2;
 
-            Object[] temp = new Object[super.capacity];
+            Object[] temp = new Object[capacity];
 
-            for (int i = 0; i < super.size; i++) {
-                temp[super.size + i] = super.elements[super.size + i];
+            int i = 0;
+
+            while (start != end) {
+                temp[i++] = elements[start];
+                start = (start % size) + 1;
             }
 
-            super.elements = temp;
+            start = 0;
+            end = size;
+
+            elements = temp;
         }
 
         return super.add(data);
