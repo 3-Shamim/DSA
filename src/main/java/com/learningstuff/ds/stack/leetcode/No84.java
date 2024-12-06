@@ -41,6 +41,34 @@ public class No84 {
         return maxArea;
     }
 
+    public static int largestRectangleArea1(int[] heights) {
+
+        int maxArea = 0;
+
+        for (int i = 0; i < heights.length; i++) {
+
+            int j = i;
+            int count = 0;
+
+            int min = Integer.MAX_VALUE;
+
+            while (j >= 0) {
+
+                count++;
+
+                min = Math.min(min, heights[j]);
+
+                maxArea = Math.max(maxArea, (min * count));
+
+                j--;
+
+            }
+
+        }
+
+        return maxArea;
+    }
+
     public static void main(String[] args) {
 
         System.out.println(largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
