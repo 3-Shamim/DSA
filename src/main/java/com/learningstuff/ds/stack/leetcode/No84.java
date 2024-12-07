@@ -1,5 +1,7 @@
 package com.learningstuff.ds.stack.leetcode;
 
+import java.util.Stack;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim
@@ -15,24 +17,24 @@ public class No84 {
 
     public static int largestRectangleArea(int[] heights) {
 
+        Stack<Integer> stack = new Stack<>();
         int maxArea = 0;
 
-        for (int i = 0; i < heights.length; i++) {
+        for (int i = 0; i <= heights.length; i++) {
 
-            int j = i;
-            int count = 0;
+            int h = i == heights.length ? 0 : heights[i];
 
-            int min = Integer.MAX_VALUE;
+            if (stack.isEmpty() || h >= heights[stack.peek()]) {
+                stack.push(i);
+            } else {
 
-            while (j >= 0) {
+                int top = stack.pop();
 
-                count++;
+                int count = stack.isEmpty() ? i : i - 1 - stack.peek();
 
-                min = Math.min(min, heights[j]);
+                maxArea = Math.max(maxArea, heights[top] * count);
 
-                maxArea = Math.max(maxArea, (min * count));
-
-                j--;
+                i--;
 
             }
 
@@ -47,22 +49,19 @@ public class No84 {
 
         for (int i = 0; i < heights.length; i++) {
 
-            int j = i;
             int count = 0;
 
-            int min = Integer.MAX_VALUE;
+            for (int j = i + 1; j < heights.length; j++) {
 
-            while (j >= 0) {
+                if (heights[i] > heights[j]) {
+                    break;
+                }
 
                 count++;
 
-                min = Math.min(min, heights[j]);
-
-                maxArea = Math.max(maxArea, (min * count));
-
-                j--;
-
             }
+
+            maxArea = Math.max(maxArea, heights[i] * (count + 1));
 
         }
 
@@ -71,9 +70,14 @@ public class No84 {
 
     public static void main(String[] args) {
 
-        System.out.println(largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
-        System.out.println(largestRectangleArea(new int[]{2, 4}));
-        System.out.println(largestRectangleArea(new int[]{4, 4}));
+//        System.out.println(largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
+//        System.out.println(largestRectangleArea(new int[]{2, 4}));
+//        System.out.println(largestRectangleArea(new int[]{1, 2, 4, 3, 1}));
+//        System.out.println(largestRectangleArea(new int[]{4, 4}));
+//        System.out.println(largestRectangleArea(new int[]{1, 3, 4, 3, 1}));
+//        System.out.println(largestRectangleArea(new int[]{1, 3, 4, 4, 3, 1}));
+//        System.out.println(largestRectangleArea(new int[]{1, 1}));
+        System.out.println(largestRectangleArea(new int[]{4, 2, 0, 3, 2, 5}));
 
     }
 
