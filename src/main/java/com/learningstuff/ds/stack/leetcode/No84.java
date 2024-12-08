@@ -70,13 +70,13 @@ public class No84 {
 
     public static void main(String[] args) {
 
-//        System.out.println(largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
-//        System.out.println(largestRectangleArea(new int[]{2, 4}));
-//        System.out.println(largestRectangleArea(new int[]{1, 2, 4, 3, 1}));
-//        System.out.println(largestRectangleArea(new int[]{4, 4}));
-//        System.out.println(largestRectangleArea(new int[]{1, 3, 4, 3, 1}));
-//        System.out.println(largestRectangleArea(new int[]{1, 3, 4, 4, 3, 1}));
-//        System.out.println(largestRectangleArea(new int[]{1, 1}));
+        System.out.println(largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
+        System.out.println(largestRectangleArea(new int[]{2, 4}));
+        System.out.println(largestRectangleArea(new int[]{1, 2, 4, 3, 1}));
+        System.out.println(largestRectangleArea(new int[]{4, 4}));
+        System.out.println(largestRectangleArea(new int[]{1, 3, 4, 3, 1}));
+        System.out.println(largestRectangleArea(new int[]{1, 3, 4, 4, 3, 1}));
+        System.out.println(largestRectangleArea(new int[]{1, 1}));
         System.out.println(largestRectangleArea(new int[]{4, 2, 0, 3, 2, 5}));
 
     }
