@@ -14,10 +14,13 @@ public class Node {
     Node left;
     Node right;
 
+    int height;
+
     public Node(int value) {
         this.value = value;
         this.left = null;
         this.right = null;
+        this.height = 0;
     }
 
     @Override
@@ -26,6 +29,7 @@ public class Node {
                 "value=" + value +
                 ", left=" + left +
                 ", right=" + right +
+                ", height=" + height +
                 '}';
     }
 
