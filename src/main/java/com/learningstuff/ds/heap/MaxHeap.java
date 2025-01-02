@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MaxHeap {
 
-    private List<Integer> heap;
+    private final List<Integer> heap;
 
     public MaxHeap() {
         heap = new ArrayList<>();
