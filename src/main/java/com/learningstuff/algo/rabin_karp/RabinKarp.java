@@ -9,44 +9,89 @@ package com.learningstuff.algo.rabin_karp;
 
 public class RabinKarp {
 
+    private static final long PRIME_NUMBER = 5381;
+    private static final long TOTAL_ALPHABETS = 26;
+
     public static void main(String[] args) {
 
-        String pattern = "abcd";
+        String pattern = "abc";
 
-        String text = "sdfefabcabcccabcdad";
+        String text = "aabc";
 
-        boolean exist = search(text, pattern);
+        boolean exist = searchWithSimpleHash(text, pattern);
 
         System.out.println(exist);
 
+        boolean exist1 = searchWithRabinKarpHash(text, pattern);
+
+        System.out.println(exist1);
+
     }
 
-    private static boolean search(String text, String pattern) {
+    private static boolean searchWithRabinKarpHash(String text, String pattern) {
 
-        long patternHash = createHash(pattern);
+        long patternHash = createRabinKarpHash(pattern);
 
         int left = 0;
-        int hash = 0;
+        long hash = 0;
+
+        for (int i = 0; i < text.length(); i++) {
+
+            int v = getInt(text, i);
+
+            hash += (v * (long) Math.pow(TOTAL_ALPHABETS, i)) % PRIME_NUMBER;
+
+            if (hash == patternHash && checkActualText(pattern, text, left, i + 1)) {
+                return true;
+            }
+
+            if ((i + 1) >= pattern.length()) {
+                int leftV = getInt(text, left);
+                hash -= (leftV * (long) Math.pow(TOTAL_ALPHABETS, left)) % PRIME_NUMBER;
+                left++;
+            }
+
+        }
+
+
+        return false;
+    }
+
+    private static long createRabinKarpHash(String pattern) {
+
+        long hash = 0;
+
+        for (int i = 0; i < pattern.length(); i++) {
+
+            int v = getInt(pattern, i);
+            hash += (v * (long) Math.pow(TOTAL_ALPHABETS, i)) % PRIME_NUMBER;
+
+        }
+
+        return hash;
+    }
+
+    private static boolean searchWithSimpleHash(String text, String pattern) {
+
+        long patternHash = createSimpleHash(pattern);
+
+        int left = 0;
+        long hash = 0;
 
         for (int i = 0; i < text.length(); i++) {
 
             int hashNum = getInt(text, i);
 
-            if (i >= pattern.length()) {
+            hash += hashNum;
 
-                if (hash == patternHash && checkActualText(pattern, text, left, i)) {
-                    return true;
-                }
+            if (hash == patternHash && checkActualText(pattern, text, left, i + 1)) {
+                return true;
+            }
 
-                int leftHashNum = getInt(text, left);
-
+            if ((i + 1) >= pattern.length()) {
+                long leftHashNum = getInt(text, left);
                 hash -= leftHashNum;
-                hash += hashNum;
-
                 left++;
-
-            } else {
-                hash += hashNum;
             }
 
         }
@@ -55,10 +100,11 @@ public class RabinKarp {
     }
 
     private static boolean checkActualText(String pattern, String text, int left, int right) {
+        System.out.println(left + " " + right + " " + text.substring(left, right));
         return pattern.equals(text.substring(left, right));
     }
 
-    private static long createHash(String text) {
+    private static long createSimpleHash(String text) {
 
         long hash = 0;
 
