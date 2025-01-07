@@ -32,27 +32,33 @@ public class RabinKarp {
 
         long patternHash = createRabinKarpHash(pattern);
 
+        int patternLen = pattern.length() - 1;
+
         int left = 0;
         long hash = 0;
 
         for (int i = 0; i < text.length(); i++) {
 
+            int pow = i <= patternLen ? patternLen - i : 0;
+
             int v = getInt(text, i);
+            hash += (v * (long) Math.pow(TOTAL_ALPHABETS, pow)) % PRIME_NUMBER;
 
-            hash += (v * (long) Math.pow(TOTAL_ALPHABETS, i)) % PRIME_NUMBER;
-
-            if (hash == patternHash && checkActualText(pattern, text, left, i + 1)) {
+            if (patternHash == hash && checkActualText(pattern, text, left, i + 1)) {
                 return true;
             }
 
-            if ((i + 1) >= pattern.length()) {
+            if (i >= patternLen) {
+
                 int leftV = getInt(text, left);
-                hash -= (leftV * (long) Math.pow(TOTAL_ALPHABETS, left)) % PRIME_NUMBER;
+                hash -= (leftV * (long) Math.pow(TOTAL_ALPHABETS, patternLen)) % PRIME_NUMBER;
+                hash *= TOTAL_ALPHABETS;
+
                 left++;
+
             }
 
         }
-
 
         return false;
     }
@@ -60,11 +66,12 @@ public class RabinKarp {
     private static long createRabinKarpHash(String pattern) {
 
         long hash = 0;
+        int len = pattern.length() - 1;
 
         for (int i = 0; i < pattern.length(); i++) {
 
             int v = getInt(pattern, i);
-            hash += (v * (long) Math.pow(TOTAL_ALPHABETS, i)) % PRIME_NUMBER;
+            hash += (v * (long) Math.pow(TOTAL_ALPHABETS, len - i)) % PRIME_NUMBER;
 
         }
 
