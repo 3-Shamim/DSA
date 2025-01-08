@@ -1,4 +1,4 @@
-package com.learningstuff.algo.rabin_karp;
+package com.learningstuff.algo.string_pattern_match;
 
 /**
  * Created by IntelliJ IDEA.
