@@ -9,12 +9,20 @@ package com.learningstuff.huffman_coding;
 
 public class Node implements Comparable<Node> {
 
-    private char symbol;
-    private int frequency;
+    private final char symbol;
+    private final int frequency;
 
     public Node(char symbol, int frequency) {
         this.symbol = symbol;
         this.frequency = frequency;
+    }
+
+    public char getSymbol() {
+        return symbol;
+    }
+
+    public int getFrequency() {
+        return frequency;
     }
 
     @Override
@@ -22,4 +30,11 @@ public class Node implements Comparable<Node> {
         return this.frequency - that.frequency;
     }
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                "symbol=" + symbol +
+                ", frequency=" + frequency +
+                '}';
+    }
 }
