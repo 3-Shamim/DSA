@@ -11,10 +11,21 @@ public class Node implements Comparable<Node> {
 
     private final char symbol;
     private final int frequency;
+    private final Node left;
+    private final Node right;
 
     public Node(char symbol, int frequency) {
         this.symbol = symbol;
         this.frequency = frequency;
+        this.left = null;
+        this.right = null;
+    }
+
+    public Node(char symbol, int frequency, Node left, Node right) {
+        this.symbol = symbol;
+        this.frequency = frequency;
+        this.left = left;
+        this.right = right;
     }
 
     public char getSymbol() {
@@ -23,6 +34,14 @@ public class Node implements Comparable<Node> {
 
     public int getFrequency() {
         return frequency;
+    }
+
+    public Node getLeft() {
+        return left;
+    }
+
+    public Node getRight() {
+        return right;
     }
 
     @Override
@@ -37,4 +56,5 @@ public class Node implements Comparable<Node> {
                 ", frequency=" + frequency +
                 '}';
     }
+
 }

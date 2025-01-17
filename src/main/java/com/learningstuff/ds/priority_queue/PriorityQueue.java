@@ -96,4 +96,8 @@ public class PriorityQueue<T extends Comparable<T>> {
         System.out.println(list);
     }
 
+    public int getSize() {
+        return list.size();
+    }
+
 }

@@ -18,6 +18,7 @@ public class HuffmanCoding {
 
         String text = "aabbcbaded";
 
+        // Calculate character frequency
         Map<Character, Integer> freq = new HashMap<>();
 
         for (int i = 0; i < text.length(); i++) {
@@ -29,6 +30,8 @@ public class HuffmanCoding {
 
         }
 
+        // Create priority query. Priority is min frequency node will be the always in the first place
+        // Using min heap
         PriorityQueue<Node> queue = new PriorityQueue<>();
 
         for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
@@ -36,12 +39,19 @@ public class HuffmanCoding {
             queue.insert(node);
         }
 
-        Node node = queue.remove();
+        // Generate the tree
 
-        while (node != null) {
-            System.out.println(node);
-            node = queue.remove();
+        while (queue.getSize() > 1) {
+            Node f = queue.remove();
+            Node s = queue.remove();
+            Node node = new Node('-', f.getFrequency() + s.getFrequency(), f, s);
+            queue.insert(node);
         }
+
+        Node root = queue.remove();
+
+
+
 
     }
 
