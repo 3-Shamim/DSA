@@ -31,6 +31,9 @@ public class SquareRootDecomposition {
         int sum3 = getRangeSum(temp, sqrtLen, arr, 1, 4);
         System.out.println(sum3);
 
+        int sum4 = getRangeSum(temp, sqrtLen, arr, 1, 5);
+        System.out.println(sum4);
+
     }
 
     private static int[] precomputeBlockSum(int sqrtLen, int[] arr) {
@@ -53,10 +56,10 @@ public class SquareRootDecomposition {
             int s = i * sqrtLen;
             int e = (s + sqrtLen - 1);
 
-            if (s >= rS && e <= rE) {
+            if (s == rS && rE >= e) {
                 sum += temp[i];
                 rS += sqrtLen;
-            } else if (rS != s) {
+            } else if (rS > s) {
 
                 int min = Math.min(e, rE);
 
@@ -65,13 +68,17 @@ public class SquareRootDecomposition {
                     rS++;
                 }
 
-            } else {
+            } else if (rE < e) {
 
                 while (rS <= rE) {
                     sum += arr[rS];
                     rS++;
                 }
 
+            }
+
+            if (rS >= rE) {
+                break;
             }
 
         }
