@@ -1,5 +1,10 @@
 package com.learningstuff.ds.tree.binary_tree;
 
+import com.learningstuff.Pair;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Md. Shamim Molla
@@ -25,11 +30,11 @@ public class BinaryTree2 {
             return n;
         }
 
-        if (value < root.value) {
+        if (value < node.value) {
             node.left = insert(node.left, value);
         }
 
-        if (value > root.value) {
+        if (value > node.value) {
             node.right = insert(node.right, value);
         }
 
@@ -110,6 +115,86 @@ public class BinaryTree2 {
         System.out.println(bt.calculateHeight());
         System.out.println(bt.isBalanced());
 
+        bt.printVerticalOrder();
+        System.out.println();
+        bt.printVerticalOrderUsingBFS();
+
+    }
+
+    public void printVerticalOrderUsingBFS() {
+
+        int min = 0;
+        int max = 0;
+
+        Map<Integer, List<Node>> map = new HashMap<>();
+
+        Queue<Pair<Node, Integer>> queue = new LinkedList<>();
+        queue.add(new Pair<>(this.root, 0));
+
+        while (!queue.isEmpty()) {
+
+            Pair<Node, Integer> remove = queue.remove();
+
+            min = Math.min(min, remove.getSecond());
+            max = Math.max(max, remove.getSecond());
+
+            List<Node> nodes = map.getOrDefault(remove.getSecond(), new ArrayList<>());
+            nodes.add(remove.getFirst());
+            map.put(remove.getSecond(), nodes);
+
+            if (remove.getFirst().left != null) {
+                queue.add(new Pair<>(remove.getFirst().left, remove.getSecond() - 1));
+            }
+
+            if (remove.getFirst().right != null) {
+                queue.add(new Pair<>(remove.getFirst().right, remove.getSecond() + 1));
+            }
+
+        }
+
+        for (int i = min; i <= max; i++) {
+            System.out.println(
+                    map.get(i).stream().map(node -> node.value).collect(Collectors.toSet())
+            );
+        }
+
+    }
+
+    public void printVerticalOrder() {
+
+        Map<Integer, List<Node>> map = new HashMap<>();
+
+        int[] range = verticalOrderHelper(this.root, 0, map);
+
+        for (int i = range[0]; i <= range[1]; i++) {
+            System.out.println(
+                    map.get(i).stream().map(node -> node.value).collect(Collectors.toSet())
+            );
+        }
+
+    }
+
+    private int[] verticalOrderHelper(Node node, int col, Map<Integer, List<Node>> map) {
+
+        if (node == null) {
+            return new int[]{0, 0};
+        }
+
+        List<Node> nodes = map.getOrDefault(col, new ArrayList<>());
+        nodes.add(node);
+        map.put(col, nodes);
+
+        int[] left = verticalOrderHelper(node.left, col - 1, map);
+
+        int[] right = verticalOrderHelper(node.right, col + 1, map);
+
+        int min = Math.min(left[0], right[0]);
+        int max = Math.max(left[1], right[1]);
+
+        return new int[]{
+                Math.min(col, min),
+                Math.max(col, max)
+        };
     }
 
 }
