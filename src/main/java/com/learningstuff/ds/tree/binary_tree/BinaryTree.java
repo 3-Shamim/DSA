@@ -1,4 +1,4 @@
-package com.learningstuff.ds.binary_tree;
+package com.learningstuff.ds.tree.binary_tree;
 
 import java.util.LinkedList;
 import java.util.Queue;

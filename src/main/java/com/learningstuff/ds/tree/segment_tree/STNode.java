@@ -1,4 +1,4 @@
-package com.learningstuff.ds.binary_tree.segment_tree;
+package com.learningstuff.ds.tree.segment_tree;
 
 /**
  * Created by IntelliJ IDEA.
