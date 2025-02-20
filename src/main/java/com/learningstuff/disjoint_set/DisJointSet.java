@@ -33,11 +33,21 @@ public class DisJointSet {
 
             System.out.println(from + " " + to);
 
+            if (from == to) {
+                System.out.println("It's a cycle");
+                break;
+            }
 
+            union(from, to, parent);
 
         }
 
+        System.out.println(Arrays.toString(parent));
 
+    }
+
+    private static void union(int from, int to, int[] parent) {
+        parent[from] = to;
     }
 
     private static int findAbsoluteParent(int[] parent, int v) {
